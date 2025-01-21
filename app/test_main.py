@@ -21,10 +21,16 @@ from app.main import outdated_products
                                   "expiration_date": date(2025, 1, 19),
                                   "price": 600}],
                                  ["salmon"],
-                                 id="Expiration day yesterday outdated")
+                                 id="Expiration day yesterday outdated"),
+                             pytest.param([
+                                 {"name": "salmon",
+                                  "expiration_date": date.today(),
+                                  "price": 600}],
+                                 ["salmon"],
+                                 id="Expiration day today outdated")
                          ])
 def test_outdated_products(current_product: list[dict],
                            expected_output: list[str]) -> None:
-    with mock.patch("datetime.date.today") as mock_date:
+    with mock.patch("datetime.date") as mock_date:
         mock_date.today.return_value = date(2025, 1, 20)
         assert outdated_products(current_product) == expected_output

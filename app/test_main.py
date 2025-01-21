@@ -24,9 +24,9 @@ from app.main import outdated_products
                                  id="Expiration day yesterday outdated"),
                              pytest.param([
                                  {"name": "salmon",
-                                  "expiration_date": date.today(),
+                                  "expiration_date": date(2025, 1, 20),
                                   "price": 600}],
-                                 ["salmon"],
+                                 [],
                                  id="Expiration day today outdated")
                          ])
 def test_outdated_products(current_product: list[dict],

@@ -24,7 +24,7 @@ from app.main import outdated_products
                                  id="Expiration day yesterday outdated")
                          ])
 def test_outdated_products(current_product: list[dict],
-                           expected_output: list[str]):
+                           expected_output: list[str]) -> None:
     with mock.patch("datetime.date.today") as mock_date:
         mock_date.today.return_value = date(2025, 1, 20)
         assert outdated_products(current_product) == expected_output
